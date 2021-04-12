@@ -1,6 +1,6 @@
 const calculateBmi = (height: number, weight: number): string => {
-  height=height/100
-  
+  height = height / 100;
+
   const bmi: number = weight / (height * height);
   let bm;
   switch (true) {
@@ -25,7 +25,7 @@ const calculateBmi = (height: number, weight: number): string => {
     case 35 <= bmi && bmi < 40:
       bm = "Obese Class II (Severely obese)";
       break;
-    case  bmi > 40:
+    case bmi > 40:
       bm = "Obese Class III (Very severely obese)";
       break;
     default:
@@ -34,4 +34,35 @@ const calculateBmi = (height: number, weight: number): string => {
 
   return bm;
 };
-console.log(calculateBmi(180, 74))
+console.log(calculateBmi(180, 74));
+
+interface ExObj {
+  periodLength: number;
+  trainingDays: number;
+  success: boolean;
+  rating: number;
+  ratingDescription: string;
+  target: number;
+  average: number;
+}
+
+const calculateExercise = (r: number, e: number[]): ExObj => {
+
+const  trainingDays= e.filter((ex, exInd) => ex>0)
+const avg = (e.reduce((acc, curr)=> acc+curr,0))/e.length
+
+const success= avg>=r
+
+const ratingDescription = success?"Good":"not too bad but could be better"
+
+  return  {
+  periodLength: e.length,
+  trainingDays:  trainingDays.length,
+  success,
+  rating: r,
+  ratingDescription,
+  target: r,
+  average: avg
+}
+};
+console.log(calculateExercise( 2, [3, 0, 2, 4.5, 0, 3, 1]))
