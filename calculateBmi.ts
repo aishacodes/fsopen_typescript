@@ -1,3 +1,18 @@
+interface Values {
+  height: number;
+  weight: number;
+}
+
+const parseArgument = (args: Array<string>): Values => {
+  if (args.length < 4) throw new Error("Not enough arguments");
+  if (args.length > 4) throw new Error("Too many arguments");
+
+  return {
+    height: Number(args[2]),
+    weight: Number(args[3]),
+  };
+};
+
 const calculateBmi = (height: number, weight: number): string => {
   height = height / 100;
 
@@ -34,35 +49,10 @@ const calculateBmi = (height: number, weight: number): string => {
 
   return bm;
 };
-console.log(calculateBmi(180, 74));
 
-interface ExObj {
-  periodLength: number;
-  trainingDays: number;
-  success: boolean;
-  rating: number;
-  ratingDescription: string;
-  target: number;
-  average: number;
+try {
+  const { height, weight } = parseArgument(process.argv);
+  console.log(calculateBmi(height, weight));
+} catch (error) {
+  console.log("Error, something bad happened, message: ", error.message);
 }
-
-const calculateExercise = (r: number, e: number[]): ExObj => {
-
-const  trainingDays= e.filter((ex, exInd) => ex>0)
-const avg = (e.reduce((acc, curr)=> acc+curr,0))/e.length
-
-const success= avg>=r
-
-const ratingDescription = success?"Good":"not too bad but could be better"
-
-  return  {
-  periodLength: e.length,
-  trainingDays:  trainingDays.length,
-  success,
-  rating: r,
-  ratingDescription,
-  target: r,
-  average: avg
-}
-};
-console.log(calculateExercise( 2, [3, 0, 2, 4.5, 0, 3, 1]))
