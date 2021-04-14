@@ -6,6 +6,8 @@
   "scripts": {
     "calculateBmi": "ts-node calculateBmi.ts",
     "calculateExercise": "ts-node calculateExercise.ts",
+    "start": "ts-node index.ts",
+    "dev":"ts-node-dev index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
